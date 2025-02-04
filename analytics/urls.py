@@ -38,7 +38,7 @@ urlpatterns = ([
 ])
 
 urlpatterns += i18n_patterns(
-    path('api/registration/', include('dj_rest_auth.registration.urls')),
+    # path('api/registration/', include('dj_rest_auth.registration.urls')),
     path('api/', include('dj_rest_auth.urls')),
     path('api/user/', include('analytics.user.urls')),
     path('api/main/', include('analytics.main.urls')),

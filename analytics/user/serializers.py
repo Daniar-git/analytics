@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
 
     class Meta:
-        fields = "__all__"
+        exclude = ('password', 'last_login', 'is_superuser', 'is_staff', 'date_joined')
         model = User
 
 
@@ -37,9 +37,6 @@ class UserRegistrationSerializer(RegisterSerializer):
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', ''),
         }
-
-    # def custom_signup(self, request, user):
-    #     user.save()
 
 
 

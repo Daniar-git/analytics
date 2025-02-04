@@ -1,8 +1,9 @@
-from .serializers import UserSerializer, UserDetailsSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, UserDetailsSerializer, UserUpdateSerializer, TokenSerializer
 from .models import User
 
 from dj_rest_auth.models import TokenModel
 from dj_rest_auth.views import UserDetailsView
+from dj_rest_auth.registration.views import RegisterView
 
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -74,3 +75,11 @@ class UserTokenInfo(APIView):
         if not token:
             return Response({"status": "user not found"}, status=400)
         return Response(UserSerializer(token.user).data, status=200)
+
+
+
+class UserRegisterView(LoggingMixin, RegisterView):
+
+    def get_response_data(self, user):
+        token, _ = TokenModel.objects.get_or_create(user=user)
+        return TokenSerializer(user.auth_token, context=self.get_serializer_context()).data

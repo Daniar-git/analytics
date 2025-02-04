@@ -161,7 +161,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-
 REST_AUTH = {
     'TOKEN_SERIALIZER': 'analytics.user.serializers.TokenSerializer',
     'USER_DETAILS_SERIALIZER': 'analytics.user.serializers.UserSerializer',
